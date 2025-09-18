@@ -1,0 +1,21 @@
+sudo apt update && sudo apt upgrade -y
+ sudo apt install -y python3 python3-venv python3-pip git curl build-essential
+ python3 --version
+ python3 -m venv k8s_env
+ source k8s_env/bin/activate
+ pip install --upgrade pip
+ pip install flask langchain_community langgraph
+ curl -fsSL https://ollama.com/install.sh | sh
+ ollama --version
+ curl http://localhost:11434
+ nano app.py
+ kubectl get nodes
+ kubectl get pods -A
+ python app.py
+ nano app.py 
+ python app.py
+ollama pull phi3
+
+3.88.157.21
+
+curl -X POST http://3.88.157.21:5000/query -H "Content-Type: application/json" -d '{"query":"list all pods"}'
