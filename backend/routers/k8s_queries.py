@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from backend.models.query_models import K8sQueryRequest, K8sQueryResponse
-from backend.ai.langgraph_handler import ai_parse_and_execute
+from ..models.query_models import K8sQueryRequest, K8sQueryResponse
+from ..ai.langgraph_handler import ai_parse_and_execute
 
 router = APIRouter()
 
