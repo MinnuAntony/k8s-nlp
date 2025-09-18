@@ -13,6 +13,7 @@ MODEL = os.getenv("BEDROCK_MODEL", "anthropic.claude-3-haiku-20240307-v1:0")
 
 def query_llm(prompt: str) -> str:
     body = {
+        "anthropic_version": "bedrock-2023-05-31",   # ✅ required field
         "messages": [
             {"role": "user", "content": [{"type": "text", "text": prompt}]}
         ],
