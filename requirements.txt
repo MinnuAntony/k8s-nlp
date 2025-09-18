@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+kubernetes
+boto3
+langgraph
+pydantic
