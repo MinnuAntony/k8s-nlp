@@ -1,21 +1,17 @@
-import os
 import json
 import boto3
+import os
 
-# Bedrock runtime client
 client = boto3.client(
     "bedrock-runtime",
     region_name=os.getenv("AWS_REGION"),
     aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY")
+    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
 )
 
 MODEL = os.getenv("BEDROCK_MODEL", "anthropic.claude-3-haiku-20240307-v1:0")
 
 def query_llm(prompt: str) -> str:
-    """
-    Query AWS Bedrock Claude model and return string output.
-    """
     body = {
         "messages": [
             {"role": "user", "content": [{"type": "text", "text": prompt}]}
@@ -30,12 +26,8 @@ def query_llm(prompt: str) -> str:
         body=json.dumps(body)
     )
 
-    result = json.loads(response["body"].read())
+    # Decode the streaming body into a Python dict
+    result = json.loads(response["body"].read().decode("utf-8"))
 
-    # Claude responses are inside "content"
-    if "output" in result:
-        return result["output"]
-    elif "content" in result:
-        return result["content"][0]["text"]
-    else:
-        return json.dumps(result)
+    # Claude puts its text inside result["content"][0]["text"]
+    return result["content"][0]["text"]
