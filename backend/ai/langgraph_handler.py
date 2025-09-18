@@ -31,7 +31,7 @@
 
 #     return explanation, result
 
-from ..k8s_client.client import list_pods, list_services, describe_pod, get_pod_logs
+from backend.k8s_client.client import list_pods, list_services, describe_pod, get_pod_logs
 from .bedrock_client import query_llm
 
 def ai_parse_and_execute(query, namespace="default"):
